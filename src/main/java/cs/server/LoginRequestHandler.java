@@ -3,6 +3,7 @@ package cs.server;
 import cs.util.*;
 import cs.util.request.LoginRequestPacket;
 import cs.util.response.LoginResponsePacket;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -15,7 +16,10 @@ import java.util.UUID;
  * @Date: Create in 20:50 2018/10/11 2018
  * @Modify:
  */
+@ChannelHandler.Sharable
 public class LoginRequestHandler  extends SimpleChannelInboundHandler<LoginRequestPacket> {
+
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket loginRequestPacket) throws Exception {
 //        LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
@@ -67,4 +71,13 @@ public class LoginRequestHandler  extends SimpleChannelInboundHandler<LoginReque
         SessionUtil.unBindSession(ctx.channel());
     }
 
+
+    private static class  Handler {
+        private static   LoginRequestHandler loginRequestHandler =new LoginRequestHandler();
+
+    }
+
+    public  static LoginRequestHandler  getReqhander(){
+        return Handler.loginRequestHandler;
+    }
 }
