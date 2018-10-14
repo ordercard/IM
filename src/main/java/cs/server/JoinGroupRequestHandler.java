@@ -1,5 +1,6 @@
 package cs.server;
 
+import cs.entry.Packet;
 import cs.util.SessionUtil;
 import cs.util.request.JoinGroupRequestPacket;
 import cs.util.response.JoinGroupResponsePacket;
@@ -14,6 +15,8 @@ import io.netty.channel.group.ChannelGroup;
  * @Modify:
  */
 public class JoinGroupRequestHandler  extends SimpleChannelInboundHandler<JoinGroupRequestPacket> {
+    public static final SimpleChannelInboundHandler<? extends Packet> INSTANCE = new JoinGroupRequestHandler();
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, JoinGroupRequestPacket msg) throws Exception {
 

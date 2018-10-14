@@ -1,5 +1,6 @@
 package cs.server;
 
+import cs.entry.Packet;
 import cs.util.Session;
 import cs.util.SessionUtil;
 import cs.util.request.QuitGroupRequestPacket;
@@ -15,6 +16,8 @@ import io.netty.channel.group.ChannelGroup;
  * @Modify:
  */
 public class QuitGroupRequestHandler extends SimpleChannelInboundHandler<QuitGroupRequestPacket> {
+    public static final SimpleChannelInboundHandler<? extends Packet> INSTANCE = new QuitGroupRequestHandler();
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, QuitGroupRequestPacket requestPacket) throws Exception {
         // 1. 获取群对应的 channelGroup，然后将当前用户的 channel 移除

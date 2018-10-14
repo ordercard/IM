@@ -1,5 +1,6 @@
 package cs.server;
 
+import cs.entry.Packet;
 import cs.util.Session;
 import cs.util.SessionUtil;
 import cs.util.request.ListGroupMembersRequestPacket;
@@ -18,6 +19,8 @@ import java.util.List;
  * @Modify:
  */
 public class ListGroupMembersRequestHandler extends SimpleChannelInboundHandler<ListGroupMembersRequestPacket> {
+    public static final SimpleChannelInboundHandler<? extends Packet> INSTANCE = new ListGroupMembersRequestHandler();
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ListGroupMembersRequestPacket requestPacket) throws Exception {
 // 1. 获取群的 ChannelGroup

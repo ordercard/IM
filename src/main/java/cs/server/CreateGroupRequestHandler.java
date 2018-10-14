@@ -1,5 +1,6 @@
 package cs.server;
 
+import cs.entry.Packet;
 import cs.util.IDUtil;
 import cs.util.SessionUtil;
 import cs.util.request.CreateGroupRequestPacket;
@@ -20,6 +21,8 @@ import java.util.List;
  * @Modify:
  */
 public class CreateGroupRequestHandler extends SimpleChannelInboundHandler<CreateGroupRequestPacket> {
+    public static final SimpleChannelInboundHandler<? extends Packet> INSTANCE = new CreateGroupRequestHandler() ;
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, CreateGroupRequestPacket msg) throws Exception {
         List<String> userIdList = msg.getUserIdList();

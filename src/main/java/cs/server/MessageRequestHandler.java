@@ -1,5 +1,6 @@
 package cs.server;
 
+import cs.entry.Packet;
 import cs.util.*;
 import cs.util.request.MessageRequestPacket;
 import cs.util.response.MessageResponsePacket;
@@ -14,6 +15,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @Modify:
  */
 public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRequestPacket> {
+    public static final SimpleChannelInboundHandler<? extends Packet> INSTANCE =  new MessageRequestHandler();
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequestPacket messageRequestPacket) {
 

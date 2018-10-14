@@ -2,6 +2,7 @@ package cs.server;
 
 import cs.util.LoginUtil;
 import cs.util.SessionUtil;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -12,6 +13,8 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @Modify:
  */
 public class AuthHandler extends ChannelInboundHandlerAdapter {
+
+    public static final ChannelHandler INSTANCE =  new AuthHandler();
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {

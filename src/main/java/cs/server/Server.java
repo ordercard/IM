@@ -54,14 +54,16 @@ public class Server {
                     //    ch.pipeline().addLast(new LoginRequestHandler());
                         //netty提供了多个连接共享一个handler的方式
                         ch.pipeline().addLast(LoginRequestHandler.getReqhander());
+                        ch.pipeline().addLast(AuthHandler.INSTANCE);
+                        ch.pipeline().addLast(IMGenHandler.INSTANCE);
                         ch.pipeline().addLast(new AuthHandler());
-                        ch.pipeline().addLast(new MessageRequestHandler());
-                        ch.pipeline().addLast(new CreateGroupRequestHandler());
-                        ch.pipeline().addLast(new JoinGroupRequestHandler());
-                        ch.pipeline().addLast(new ListGroupMembersRequestHandler());
-                        ch.pipeline().addLast(new QuitGroupRequestHandler());
-                        ch.pipeline().addLast(new GroupMessageRequestHandler());
-                        ch.pipeline().addLast(new LogoutRequestHandler());
+//                        ch.pipeline().addLast(new MessageRequestHandler());
+//                        ch.pipeline().addLast(new CreateGroupRequestHandler());
+//                        ch.pipeline().addLast(new JoinGroupRequestHandler());
+//                        ch.pipeline().addLast(new ListGroupMembersRequestHandler());
+//                        ch.pipeline().addLast(new QuitGroupRequestHandler());
+//                        ch.pipeline().addLast(new GroupMessageRequestHandler());
+//                        ch.pipeline().addLast(new LogoutRequestHandler());
                         ch.pipeline().addLast(new PacketEncoder());
 
                     }
