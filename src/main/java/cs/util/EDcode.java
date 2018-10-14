@@ -48,6 +48,9 @@ public class EDcode {
         map.put(QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class);
         map.put(LIST_GROUP_MEMBERS_REQUEST, ListGroupMembersRequestPacket.class);
         map.put(LIST_GROUP_MEMBERS_RESPONSE, ListGroupMembersResponsePacket.class);
+        map.put(GROUP_MESSAGE_REQUEST, GroupMessageRequestPacket.class);
+        map.put(GROUP_MESSAGE_RESPONSE, GroupMessageResponsePacket.class);
+
         Serializer serializer =new JsonSerI();
         sermap.put(serializer.getSerializerAlgorithm(),serializer);
     }

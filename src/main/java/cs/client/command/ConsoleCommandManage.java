@@ -28,6 +28,7 @@ public class ConsoleCommandManage implements ConsoleCommandSend {
         consoleCommandSendMap.put("joinGroup", new JoinGroupConsoleCommand());
         consoleCommandSendMap.put("quitGroup", new QuitGroupConsoleCommand());
         consoleCommandSendMap.put("listGroupMembers", new ListGroupMembersConsoleCommand());
+        consoleCommandSendMap.put("sendGroupMsg", new SendToGroupConsoleCommand());
     }
 
     @Override

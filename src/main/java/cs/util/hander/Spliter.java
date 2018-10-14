@@ -4,6 +4,7 @@ import cs.util.EDcode;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.LineBasedFrameDecoder;
 
 /**
  * @Auther :huiqiang
@@ -26,7 +27,6 @@ public class Spliter extends LengthFieldBasedFrameDecoder {
             ctx.channel().close();
             return null;
         }
-
         return super.decode(ctx, in);
     }
 }
