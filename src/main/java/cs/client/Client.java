@@ -3,6 +3,7 @@ package cs.client;
 import cs.client.command.ConsoleCommandManage;
 import cs.client.command.console.LoginConsoleCommand;
 import cs.util.*;
+import cs.util.hander.IMIdleStateHandler;
 import cs.util.hander.PacketDecoder;
 import cs.util.hander.PacketEncoder;
 import cs.util.hander.Spliter;
@@ -42,6 +43,7 @@ public class Client {
 
               //  ch.pipeline().addLast(new FirstClientHandler());
               //  ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 7, 4));
+                ch.pipeline().addLast(new IMIdleStateHandler());
                 ch.pipeline().addLast(new Spliter());
                 ch.pipeline().addLast(new PacketDecoder());
                 ch.pipeline().addLast(new LoginResHandler());

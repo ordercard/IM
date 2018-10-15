@@ -1,8 +1,6 @@
 package cs.server;
 
-import cs.util.hander.Spliter;
-import cs.util.hander.PacketDecoder;
-import cs.util.hander.PacketEncoder;
+import cs.util.hander.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -47,12 +45,14 @@ public class Server {
                  //       ch.pipeline().addLast(new FirstServerHandler());
 
 
-                    //   ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 7, 4));
-
+                    //  ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 7, 4));
+                        ch.pipeline().addLast(new IMIdleStateHandler());
                         ch.pipeline().addLast(new Spliter());
-                        ch.pipeline().addLast(new PacketDecoder());
-                    //    ch.pipeline().addLast(new LoginRequestHandler());
+                        ch.pipeline().addLast(EDHandler.INSTANCE);
+                     // ch.pipeline().addLast(new PacketDecoder());
+                    //  ch.pipeline().addLast(new LoginRequestHandler());
                         //netty提供了多个连接共享一个handler的方式
+                        ch.pipeline().addLast(HeartBeatRequestHandler.INSTANCE);
                         ch.pipeline().addLast(LoginRequestHandler.getReqhander());
                         ch.pipeline().addLast(AuthHandler.INSTANCE);
                         ch.pipeline().addLast(IMGenHandler.INSTANCE);
@@ -64,13 +64,26 @@ public class Server {
 //                        ch.pipeline().addLast(new QuitGroupRequestHandler());
 //                        ch.pipeline().addLast(new GroupMessageRequestHandler());
 //                        ch.pipeline().addLast(new LogoutRequestHandler());
-                        ch.pipeline().addLast(new PacketEncoder());
+ //                       ch.pipeline().addLast(new PacketEncoder());
 
                     }
                 });
                 bind(serverBootstrap, PORT);
     }
 
+
+    /*
+
+    Netty 里面很多方法都是异步的操作，在业务线程中如果要统计这部分操作的时间，都需要使用监听器回调的方式来统计耗时，如果在 NIO 线程中调用，就不需要这么干。
+1.对于耗时的操作，我们需要把这些耗时的操作丢到我们的业务线程池中去处理
+
+xxx.writeAndFlush().addListener(future -> {
+            if (future.isDone()) {
+                // 4. balabala 其他的逻辑
+                long time =  System.currentTimeMillis() - begin;
+            }
+        });writeAndFlush() 方法会返回一个 ChannelFuture 对象，我们给这个对象添加一个监听器，然后在回调方法里面，我们可以监听这个方法执行的结果，进而再执行其他逻辑，最后统计耗时，这样统计出来的耗时才是最准确的。
+     */
     private static ChannelFuture bind(final ServerBootstrap serverBootstrap, final int port) {
         return
                 serverBootstrap.bind(port).addListener(x->{
