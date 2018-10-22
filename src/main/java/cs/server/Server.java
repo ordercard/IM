@@ -23,7 +23,7 @@ public class Server {
         NioEventLoopGroup boosGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
-        final ServerBootstrap serverBootstrap = new ServerBootstrap();
+         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap
                 .group(boosGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
