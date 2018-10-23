@@ -3,10 +3,7 @@ package cs.client;
 import cs.client.command.ConsoleCommandManage;
 import cs.client.command.console.LoginConsoleCommand;
 import cs.util.*;
-import cs.util.hander.IMIdleStateHandler;
-import cs.util.hander.PacketDecoder;
-import cs.util.hander.PacketEncoder;
-import cs.util.hander.Spliter;
+import cs.util.hander.*;
 import cs.util.request.LoginRequestPacket;
 import cs.util.request.MessageRequestPacket;
 import io.netty.bootstrap.Bootstrap;
@@ -57,7 +54,8 @@ public class Client {
                 //登出响应处理
                 ch.pipeline().addLast(new LogoutResponseHandler());
                 ch.pipeline().addLast(new PacketEncoder());
-
+// 心跳定时器
+                ch.pipeline().addLast(new HeartBeatTimerHandler());
             }
         });
         connect(bootstrap, HOST, PORT, MAX_RETRY);
