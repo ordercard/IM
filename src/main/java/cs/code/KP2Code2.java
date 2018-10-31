@@ -7,7 +7,7 @@ package cs.code;
  * @Modify:
  */
 public class KP2Code2 {    public static void main(String[] args) {
-    int[] test = {6, 9, 28 ,13 ,31 ,26 ,1 ,16 ,7, 22, 49 ,46,45,46};
+    int[] test = {6, 9, 28 ,13 ,31 ,26 ,7 ,16 ,7, 22, 49 ,46,2,46};
     quicksort(test,0);
     for (int i = 0; i < test.length; i++) {
         System.out.print(test[i] + "\t");

@@ -28,7 +28,7 @@ public class KPCode {
             while (arr[i]>=temp&&i<j) {
                 i++;
             }
-            //如果满足条件则交换
+            //如果满足条件则交换 i<j
             if (i<j) {
                 t = arr[j];
                 arr[j] = arr[i];
@@ -36,7 +36,7 @@ public class KPCode {
             }
 
         }
-        //最后将基准为与i和j相等位置的数字交换
+        //最后将基准为与i和j相等位置的数字交换这里 i和j总是相等的
         arr[low] = arr[i];
         arr[i] = temp;
         //递归调用左半数组
