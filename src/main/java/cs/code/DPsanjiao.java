@@ -23,8 +23,7 @@ public class DPsanjiao {
          if( a[x][y] != -1 ) {
              return a[x][y];
          }
-
-         if (as.length==n){
+         if (x==n){
              a[x][y]= as[x][y];
         }
             else{
