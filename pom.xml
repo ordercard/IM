@@ -6,6 +6,7 @@
 
     <groupId>com.jhq.netty</groupId>
     <artifactId>jhq-netty</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
@@ -19,6 +20,9 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>tom</module>
+    </modules>
 
     <properties>
         <netty-all.version>4.1.6.Final</netty-all.version>
@@ -51,6 +55,10 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>4.2.1</version>
+        </dependency>
     </dependencies>
 </project>
